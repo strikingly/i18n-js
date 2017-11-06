@@ -16,18 +16,9 @@
 // https://github.com/umdjs/umd#regular-module
 // `returnExports.js` version
 ;(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define("i18n", function(){ return factory(root);});
-  } else if (typeof module === 'object' && module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(root);
-  } else {
-    // Browser globals (root is window)
-    root.I18n = factory(root);
-  }
+  // Changed: Don't use UMD, it will fail if custom code creates `window.define`
+  // Instead always export to global
+  root.I18n = factory(root);
 }(this, function(global) {
   "use strict";
 
